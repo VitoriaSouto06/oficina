@@ -2,7 +2,10 @@ package com.example.oficina.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Objects;
 
 import com.example.oficina.model.Cliente;
@@ -24,10 +27,10 @@ public class PedidoDTO implements Serializable{
 	private Long id;
 	private String nomeAparelho;
 	private String modeloAparelho;
-	private BigDecimal pecaValor;
-	private BigDecimal maoObra;
-	private LocalDate dataEntrada;
-	private LocalDate dataSaida;
+	private String pecaValor;
+	private String maoObra;
+	private String dataEntrada;
+	private String dataSaida;
 	private  Cliente cliente;
 	
 	
@@ -36,8 +39,8 @@ public class PedidoDTO implements Serializable{
 	}
 
 
-	public PedidoDTO(Long id, String nomeAparelho, String modeloAparelho, BigDecimal pecaValor, BigDecimal maoObra,
-			LocalDate dataEntrada, LocalDate dataSaida, Cliente cliente) {
+	public PedidoDTO(Long id, String nomeAparelho, String modeloAparelho, String pecaValor, String maoObra,
+			String dataEntrada, String dataSaida, Cliente cliente) {
 		super();
 		this.id = id;
 		this.nomeAparelho = nomeAparelho;
@@ -80,42 +83,42 @@ public class PedidoDTO implements Serializable{
 	}
 
 
-	public BigDecimal getPecaValor() {
+	public String getPecaValor() {
 		return pecaValor;
 	}
 
 
-	public void setPecaValor(BigDecimal pecaValor) {
+	public void setPecaValor(String pecaValor) {
 		this.pecaValor = pecaValor;
 	}
 
 
-	public BigDecimal getMaoObra() {
+	public String getMaoObra() {
 		return maoObra;
 	}
 
 
-	public void setMaoObra(BigDecimal maoObra) {
+	public void setMaoObra(String maoObra) {
 		this.maoObra = maoObra;
 	}
 
 
-	public LocalDate getDataEntrada() {
+	public String getDataEntrada() {
 		return dataEntrada;
 	}
 
 
-	public void setDataEntrada(LocalDate dataEntrada) {
+	public void setDataEntrada(String dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
 
-	public LocalDate getDataSaida() {
+	public String getDataSaida() {
 		return dataSaida;
 	}
 
 
-	public void setDataSaida(LocalDate dataSaida) {
+	public void setDataSaida(String dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 
@@ -130,15 +133,29 @@ public class PedidoDTO implements Serializable{
 	}
 	
 	
-	public Pedido toPedido(PedidoDTO pedidoDto) {
+	public Pedido toPedido(PedidoDTO pedidoDto,Cliente cliente) {
 		Pedido pedido = new Pedido();
 		pedido.setNomeAparelho(pedidoDto.getNomeAparelho());
 		pedido.setModeloAparelho(pedidoDto.getModeloAparelho());
-		pedido.setPecaValor(pedidoDto.getPecaValor());
-		pedido.setMaoObra(pedidoDto.getMaoObra());
-		pedido.setDataEntrada(pedido.getDataEntrada());
-		pedido.setDataSaida(pedido.getDataSaida());
-		pedido.setCliente(pedidoDto.getCliente());
+		
+		String pecaValorStr = pedidoDto.getPecaValor().replace(",", ".");
+		BigDecimal pecaValor = new BigDecimal(pecaValorStr);
+		pedido.setPecaValor(pecaValor);
+		
+		String maoObraStr = pedidoDto.getMaoObra().replace(",", ".");
+		BigDecimal maoObra = new BigDecimal(maoObraStr);
+		pedido.setMaoObra(maoObra);
+		
+		String dataEntradaStr = pedidoDto.getDataEntrada();
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+		LocalDate dataEntrada = LocalDate.parse(dataEntradaStr, formato); 
+		pedido.setDataEntrada(dataEntrada);
+		
+		String dataSaidaStr = pedidoDto.getDataSaida();
+		LocalDate dataSaida = LocalDate.parse(dataSaidaStr, formato); 
+		pedido.setDataSaida(dataSaida);
+		
+		pedido.setCliente(cliente);
 		return pedido;
 	}
 

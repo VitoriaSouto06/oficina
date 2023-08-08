@@ -2,6 +2,7 @@ package com.example.oficina.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,7 +10,9 @@ import com.example.oficina.model.Cliente;
 import com.example.oficina.services.ClienteService;
 
 public class ClienteDTO implements Serializable{
-
+	
+	@Autowired 
+	ClienteService clienteService;
 
 	private static final long serialVersionUID = 1L;
 
@@ -89,5 +92,7 @@ public class ClienteDTO implements Serializable{
 		cliente.setTelefoneCliente(clienteDto.getTelefoneCliente());
 		return cliente;
 	}
+	
+	
 		
 }

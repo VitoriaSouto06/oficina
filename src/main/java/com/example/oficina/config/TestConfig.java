@@ -2,6 +2,7 @@ package com.example.oficina.config;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,15 +25,8 @@ public class TestConfig implements CommandLineRunner{
 	ClienteRepository clienteRepository;
 	
 	public void run(String... args) throws Exception {
-		Cliente cliente = new Cliente(null,"Vitoria Teste Pedido","232332434");
-		Pedido pedido = new Pedido(null, "Radio", "Sonny", new BigDecimal("44.00"), new BigDecimal("80.00"), LocalDate.now(), LocalDate.now(), cliente);
-		clienteRepository.save(cliente);
-		pedidoRepository.save(pedido);
 		
-		Cliente cliente2 = new Cliente(null,"Teste usuario","2322345678434");
-		Pedido pedido2 = new Pedido(null, "Prancha", "Mondial", new BigDecimal("44.00"), new BigDecimal("80.00"), LocalDate.now(), LocalDate.now(), cliente2);
-		clienteRepository.save(cliente2);
-		pedidoRepository.save(pedido2);
+		
 	}
 }
 

@@ -29,10 +29,10 @@ public class Cliente implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
+	@NotBlank
 	@Column(name="nome_Cliente")
 	private String nomeCliente;
-	
+	@NotBlank
 	@Column(name="telefoneCliente")
 	private String telefoneCliente;
 	

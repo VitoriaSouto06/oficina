@@ -32,20 +32,22 @@
 	
 	   <div class="card" th:each="cliente : ${listaClientes}">
 	   		<div>
-				<div>Nome</div>
-						<div th:text="${cliente.id}">>
+			
+						<div>Id: <span th:text="${cliente.id}"> </span></div>
 							
 						</div>
-					    <div th:text="${cliente.nomeCliente}"> Nome </div>
-					    <div>Telefone</div>
-					    <div th:text="${cliente.telefoneCliente}"> Nome </div>
-	   </div>
-			<div>
+					   <div>Nome: <span th:text="${cliente.nomeCliente}"> Nome</span></div>
+					 
+					    <div>Telefone: <span th:text="${cliente.telefoneCliente}"> Telefone </span></div>
+					    <div>
 				<a href="#" th:href="@{'/'+'cliente'+'/pedidos'+'/'+${cliente.id}}"><button type="button" class="btn btn-outline-success">Pedido deste cliente</button></a>
-				<a href="#" th:href="@{'/'+'cliente'+'/pedidos'+'/'+${cliente.id}}"><button type="button" class="btn btn-outline-success">Novo pedido para este cliente</button></a>
+				<a href="#" th:href="@{'/'+'cliente'+'/novopedido'+'/'+${cliente.id}}"><button type="button" class="btn btn-outline-success">Novo pedido para este cliente</button></a>
+				<a href="#" th:href="@{'/'+'cliente'+'/alterarcliente'+'/'+${cliente.id}}"><button type="button" class="btn btn-outline-warning">Alterar cliente</button></a>
 				
 				
 			</div>
+	   </div>
+			
 			
 		</div>
 	</div>

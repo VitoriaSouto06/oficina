@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="tb_pedidos")
@@ -25,21 +28,27 @@ public class Pedido implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@Column(name="nome_aparelho")
+	@NotBlank
 	private String nomeAparelho;
 	
 	@Column(name="modelo_aparelho")
+	@NotBlank
 	private String modeloAparelho;
 	
 	@Column(name="peca_valor")
+	@NotNull
 	private BigDecimal pecaValor;
 	
 	@Column(name="mao_obra")
+	@NotNull
 	private BigDecimal maoObra;
 	
 	@Column(name="data_entrada")
+	@NotNull
 	private LocalDate dataEntrada;
 	
 	@Column(name="data_saida")
+	@NotNull
 	private LocalDate dataSaida;
 	
 	@ManyToOne

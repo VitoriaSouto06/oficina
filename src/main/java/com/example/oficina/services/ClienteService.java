@@ -26,4 +26,17 @@ public class ClienteService {
 	public Optional<Cliente> findById(Long id) {
 		return clienteRepository.findById(id);
 	}
+	
+	public void deletebyId(Long id) {
+		clienteRepository.deleteById(id);
+	}
+
+	public void update(Cliente cliente, Long id) {
+		Optional<Cliente> cliente2 = clienteRepository.findById(id);
+		Cliente cliente3 = cliente2.get();
+		cliente3.setNomeCliente(cliente.getNomeCliente());
+		cliente3.setTelefoneCliente(cliente.getTelefoneCliente());
+		clienteRepository.save(cliente3);
+		
+	}
 }

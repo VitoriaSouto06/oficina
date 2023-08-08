@@ -19,18 +19,18 @@
 				</h1>
 			</div>
 		</div>
-		<form action="/cliente/salvar" method="POST">
+		<form th:object="${clienteDTO}" action="/cliente/salvar" method="POST">
 	   <div class="card mt-2">
 			<div class="mb-3">
 				<div  class="card-body">
 						<div class="mb-3">
 						<label for="nomeCliente">Nome</label>
-						<input required class="form-control" name="nomeCliente" placeholder="Nome do cliente"/>
+						<input th:field="*{nomeCliente}" required class="form-control" placeholder="Nome do cliente"/>
 					
 					</div>
 					<div class="mb-3">
 						<label for="telefoneCliente">Telefone</label>
-						<input required class="form-control" name="telefoneCliente" placeholder="Número de telefone 90000-0000"/>
+				<input th:field="*{telefoneCliente}" required class="form-control" placeholder="Número de telefone 90000-0000"/>
 						
 					</div>
 				
@@ -42,6 +42,7 @@
 							<div class="mb-3">
 							<a href="/cliente/menu"><button type="button" class="btn btn-outline-danger">Cancelar</button></a>
 							</div>
+							
 						</div>
 			</div>
 			</div>
