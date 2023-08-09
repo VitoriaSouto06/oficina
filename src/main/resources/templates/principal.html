@@ -1,55 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <title>Clientes</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+	<title>Clientes</title>
 </head>
+
 <body>
 	<div class="container">
-	<div class="card">
-		<div class="card-header">
-			<h1 class="display-4">
-				Clientes cadastrados
-			</h1>
+		<div class="card">
+			<div class="card-header">
+				<h1 class="display-4">
+					Clientes cadastrados
+				</h1>
+			</div>
 		</div>
-	</div>
-				<nav class="navbar navbar-expand bg-body-tertiary d-flex justify-content-between">
+		<nav class="navbar navbar-expand bg-body-tertiary d-flex justify-content-between">
+
 			<div class="navbar-nav">
-			
+				<form action="/cliente/pesquisa" method="GET">
+					<div class="d-flex justify-content-around">
+					<input class="form-control me-2" name="nome" type="search" placeholder="Nome do cliente" aria-label="Search"><button class="btn btn-outline-success" type="submit">Pesquisar</button>
+					</div>
+				</form>
 			</div>
-		
-				<a href="/cliente/novo"><button type="button" class="btn btn-outline-success">Novo Cliente</button></a>
-			
+
+			<a href="/cliente/novo"><button type="button" class="btn btn-outline-success">Novo Cliente</button></a>
+
 		</nav>
-	
-			
-	
-	
-	   <div class="card" th:each="cliente : ${listaClientes}">
-	   		<div>
-			
-						<div>Id: <span th:text="${cliente.id}"> </span></div>
-							
-						</div>
-					   <div>Nome: <span th:text="${cliente.nomeCliente}"> Nome</span></div>
-					 
-					    <div>Telefone: <span th:text="${cliente.telefoneCliente}"> Telefone </span></div>
-					    <div>
-				<a href="#" th:href="@{'/'+'cliente'+'/pedidos'+'/'+${cliente.id}}"><button type="button" class="btn btn-outline-success">Pedido deste cliente</button></a>
-				<a href="#" th:href="@{'/'+'cliente'+'/novopedido'+'/'+${cliente.id}}"><button type="button" class="btn btn-outline-success">Novo pedido para este cliente</button></a>
-				<a href="#" th:href="@{'/'+'cliente'+'/alterarcliente'+'/'+${cliente.id}}"><button type="button" class="btn btn-outline-warning">Alterar cliente</button></a>
-				
-				
+
+
+
+
+		<div class="card" th:each="cliente : ${listaClientes}">
+			<div>
+
+				<div>Id: <span th:text="${cliente.id}"> </span></div>
+
 			</div>
-	   </div>
-			
-			
+			<div>Nome: <span th:text="${cliente.nomeCliente}"> Nome</span></div>
+
+			<div>Telefone: <span th:text="${cliente.telefoneCliente}"> Telefone </span></div>
+			<div>
+				<div class="d-flex justify-content-around">
+					<a href="#" th:href="@{'/'+'cliente'+'/pedidos'+'/'+${cliente.id}}"><button type="button"
+							class="btn btn-outline-success">Pedido deste cliente</button></a>
+					<a href="#" th:href="@{'/'+'cliente'+'/novopedido'+'/'+${cliente.id}}"><button type="button"
+							class="btn btn-outline-success">Novo pedido para este cliente</button></a>
+					<a href="#" th:href="@{'/'+'cliente'+'/alterarcliente'+'/'+${cliente.id}}"><button type="button"
+							class="btn btn-outline-warning">Alterar cliente</button></a>
+				</div>
+
+			</div>
 		</div>
+
+
+	</div>
 	</div>
 </body>
+
 </html>

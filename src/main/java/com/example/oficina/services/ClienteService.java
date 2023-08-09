@@ -39,4 +39,9 @@ public class ClienteService {
 		clienteRepository.save(cliente3);
 		
 	}
+	
+	public List<Cliente> findByNome(String nome) {
+		return clienteRepository.findByNomeCliente(nome);
+		
+	}
 }

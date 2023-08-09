@@ -43,8 +43,10 @@
 					  <div>Valor da mão de obra: <span th:text="${#numbers.formatDecimal(pedidos.maoObra, 0, 'POINT', 2, 'COMMA')}"></span></div>
 					  <div>Data entrada:<span th:text="${#temporals.format(pedidos.dataEntrada,'dd/MM/yyyy')}"></span></div>
 					  <div>Data Saída: <span th:text="${#temporals.format(pedidos.dataSaida,'dd/MM/yyyy')}"></span></div>
-				<a href="#" th:href="@{'/'+'cliente'+'/alterarpedido'+'/'+${pedidos.id}+'/'+${clienteid}}"><button type="button" class="btn btn-outline-warning">Alterar pedido</button></a>	
-				<a href="#" th:href="@{'/'+'cliente'+'/menu'}"><button type="button" class="btn btn-outline-info">Voltar para o Menu</button></a>					  
+				<div class="d-flex justify-content-around">
+					<a href="#" th:href="@{'/'+'cliente'+'/alterarpedido'+'/'+${pedidos.id}+'/'+${clienteid}}"><button type="button" class="btn btn-outline-warning">Alterar pedido</button></a>	
+					<a href="#" th:href="@{'/'+'cliente'+'/menu'}"><button type="button" class="btn btn-outline-info">Voltar para o Menu</button></a>					  
+	   			</div>
 	   </div>
 			
 		</div>

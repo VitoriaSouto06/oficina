@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.oficina.dto.ClienteDTO;
 import com.example.oficina.dto.PedidoDTO;
@@ -161,8 +162,13 @@ public class ClienteController {
 		return "redirect:/cliente/menu";
 		}catch(ConstraintViolationException e) {
 			return "cadastrocliente";
-		}
-		
-		
+		}	
+	}
+	
+	@GetMapping("pesquisa")
+	public String pesquisarCliente(@RequestParam("nome") String nome,Model model) {
+		List<Cliente> clientes = clienteService.findByNome(nome);
+		model.addAttribute("listaClientes", clientes);
+		return "principal";	
 	}
 }
