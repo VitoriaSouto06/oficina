@@ -25,38 +25,34 @@
 				<div  class="card-body">
 						<div class="mb-3">
 						<label for="nomeAparelho">Nome do aparelho</label>
-						<input required class="form-control" name="nomeAparelho" th:placeholder="${pedidoNomeAparelho}"/>
+						<input  class="form-control" name="nomeAparelho" th:placeholder="${pedidoNomeAparelho}"/>
 					
 					</div>
 					<div class="mb-3">
 						<label for="modeloAparelho">Modelo do aparelho</label>
-						<input required class="form-control" name="modeloAparelho" th:placeholder="${pedidoNomeModelo}"/>
+						<input  class="form-control" name="modeloAparelho" th:placeholder="${pedidoNomeModelo}"/>
 						
 					</div>
 				
 					<div class="mb-3">
 						<label for="pecaValor">Valor da peça</label>
-						<input required class="form-control" name="pecaValor" th:placeholder="${pedidoValorPeca}"/>
+						<input class="form-control" name="pecaValor" th:placeholder="${#numbers.formatDecimal(pedidoValorPeca, 0, 'POINT', 2, 'COMMA')}"/>
 						
 					</div>
 					
 					<div class="mb-3">
 						<label for="maoObra">Valor da mão de obra</label>
-						<input required class="form-control" name="maoObra" th:placeholder="${pedidoValorMao}"/>
+						<input class="form-control" name="maoObra" th:placeholder="${#numbers.formatDecimal(pedidoValorMao, 0, 'POINT', 2, 'COMMA')}"/>
 						
 					</div>
 					
 					<div class="mb-3">
 						<label for="dataEntrada">Data de entrada</label>
-						<input type="text" required class="form-control" name="dataEntrada" th:placeholder="${pedidoDataEntrada}"/>
+						<input type="text"  class="form-control" name="dataEntrada" th:placeholder="${#temporals.format(pedidoDataEntrada,'dd/MM/yyyy')}"/>
 						
 					</div>
 					
-					<div class="mb-3">
-						<label for="dataSaida">Data de saída</label>
-						<input type="text"  class="form-control" name="dataSaida" th:placeholder="${pedidoDataSaida}"/>
-						
-					</div>
+				
 						<div class="d-flex justify-content-around">
 							
 							<div class="mb-3">

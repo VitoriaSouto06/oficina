@@ -54,7 +54,7 @@
 
 			<div>Telefone: <span th:text="${cliente.telefoneCliente}"> Telefone </span></div>
 			<div>
-				<div class="d-flex justify-content-around">
+				<div class="">
 					<a href="#" th:href="@{'/'+'cliente'+'/pedidos'+'/'+${cliente.id}}"><button type="button"
 							class="btn btn-outline-success">Pedido deste cliente</button></a>
 					<a href="#" th:href="@{'/'+'cliente'+'/novopedido'+'/'+${cliente.id}}"><button type="button"
