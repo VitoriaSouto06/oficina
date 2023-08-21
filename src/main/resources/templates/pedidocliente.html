@@ -31,9 +31,15 @@
 	
 	
 	   		<div>
-				
+				     <div class="d-flex  align-items:-center">
+				<div>Cliente: </div>
 				 <div th:text="${clienteNome}"> Nome </div>
+				 </div>
+				   <div class="d-flex  align-items:-center">
+				 <div>Telefone: </div>
 				  <div th:text="${clienteTelefone}"> Nome </div>
+				  </div>
+				  
 			<div class="card" th:each="pedidos : ${listaPedidos}">
 	   		<div>
 						<div>Id do pedido: <span th:text="${pedidos.id}">  </span></div>
@@ -41,6 +47,8 @@
 					  <div>Modelo do aparelho: <span th:text="${pedidos.modeloAparelho}">  </span></div>
 					  <div>Valor da peça: <span th:text="${#numbers.formatDecimal(pedidos.pecaValor, 0, 'POINT', 2, 'COMMA')}"></span></div>
 					  <div>Valor da mão de obra: <span th:text="${#numbers.formatDecimal(pedidos.maoObra, 0, 'POINT', 2, 'COMMA')}"></span></div>
+					  <div>Total do pedido: <span th:text="${#numbers.formatDecimal(pedidos.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span></div>
+					  <div>Lucro: <span th:text="${#numbers.formatDecimal(pedidos.lucro, 0, 'POINT', 2, 'COMMA')}"></span></div>
 					  <div>Data entrada: <span th:text="${#temporals.format(pedidos.dataEntrada,'dd/MM/yyyy')}"></span></div>
 					  <div class="d-flex  align-items:-center">
 					  <div><span>Data saída: </span></div>

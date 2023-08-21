@@ -103,6 +103,7 @@ public class ClienteController {
 		Long id2 = Long.parseLong(id);
 		Optional<Cliente> cliente = clienteService.findById(id2);
 		List<Pedido> pedidos = clienteService.findById(id2).get().getPedidos();
+		
 		model.addAttribute("clienteNome", cliente.get().getNomeCliente());
 		model.addAttribute("clienteTelefone", cliente.get().getTelefoneCliente());
 		model.addAttribute("listaPedidos", pedidos);

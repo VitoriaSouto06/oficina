@@ -132,10 +132,12 @@ public class PedidoDTO implements Serializable{
 		BigDecimal maoObra = new BigDecimal(maoObraStr);
 		pedido.setMaoObra(maoObra);
 		String dataEntradaStr = pedidoDto.getDataEntrada();
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
 		LocalDate dataEntrada = LocalDate.parse(dataEntradaStr, formato); 
 		pedido.setDataEntrada(dataEntrada);
 		pedido.setCliente(cliente);
+		pedido.totalPedido();
+		pedido.lucro();
 		return pedido;
 	}
 	

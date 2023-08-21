@@ -54,7 +54,9 @@ public class Pedido implements Serializable{
 	@JoinColumn(name="client_id")
 	private  Cliente cliente;
 
+	private BigDecimal valorTotal = BigDecimal.ZERO;
 	
+	private BigDecimal lucro = BigDecimal.ZERO;
 	
 	public Pedido() {
 		super();
@@ -75,6 +77,16 @@ public class Pedido implements Serializable{
 	}
 
 
+	public void totalPedido() {
+		valorTotal = valorTotal.add(maoObra);
+		valorTotal = valorTotal.add(pecaValor);
+		
+	}
+	
+	public void lucro() {
+		lucro = lucro.add(valorTotal);
+		lucro = lucro.subtract(pecaValor);
+	}
 
 	public Long getId() {
 		return id;
@@ -168,6 +180,32 @@ public class Pedido implements Serializable{
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+
+	
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+
+	
+
+	public BigDecimal getLucro() {
+		return lucro;
+	}
+
+
+
+	public void setLucro(BigDecimal lucro) {
+		this.lucro = lucro;
 	}
 
 
