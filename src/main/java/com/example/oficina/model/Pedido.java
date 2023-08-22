@@ -48,6 +48,7 @@ public class Pedido implements Serializable{
 	private LocalDate dataEntrada;
 	
 	@Column(name="data_saida")
+	@NotNull
 	private LocalDate dataSaida;
 	
 	@ManyToOne
@@ -65,7 +66,7 @@ public class Pedido implements Serializable{
 
 
 	public Pedido(Long id, String nomeAparelho, String modeloAparelho, BigDecimal pecaValor, BigDecimal maoObra,
-			LocalDate dataEntrada, Cliente cliente) {
+			LocalDate dataEntrada, LocalDate dataSaida, Cliente cliente) {
 		super();
 		this.id = id;
 		this.nomeAparelho = nomeAparelho;
@@ -73,6 +74,7 @@ public class Pedido implements Serializable{
 		this.pecaValor = pecaValor;
 		this.maoObra = maoObra;
 		this.dataEntrada = dataEntrada;
+		this.dataSaida = dataSaida;
 		this.cliente = cliente;
 	}
 
