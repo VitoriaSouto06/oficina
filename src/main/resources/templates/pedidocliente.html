@@ -31,15 +31,14 @@
 	
 	
 	   		<div>
-				     <div class="d-flex  align-items:-center">
-				<div>Cliente: </div>
-				 <div th:text="${clienteNome}"> Nome </div>
+				  <div class="d-flex  align-items:-center">
+					  <span>Nome: </span>
+				 <div th:text=" ${clienteNome}">  Nome </div>
 				 </div>
-				   <div class="d-flex  align-items:-center">
-				 <div>Telefone: </div>
-				  <div th:text="${clienteTelefone}"> Nome </div>
+				 <div class="d-flex  align-items:-center">
+					  <span>Telefone: </span>
+				  <div th:text=" ${clienteTelefone}">  Nome </div>
 				  </div>
-				  
 			<div class="card" th:each="pedidos : ${listaPedidos}">
 	   		<div>
 						<div>Id do pedido: <span th:text="${pedidos.id}">  </span></div>
@@ -47,21 +46,15 @@
 					  <div>Modelo do aparelho: <span th:text="${pedidos.modeloAparelho}">  </span></div>
 					  <div>Valor da peça: <span th:text="${#numbers.formatDecimal(pedidos.pecaValor, 0, 'POINT', 2, 'COMMA')}"></span></div>
 					  <div>Valor da mão de obra: <span th:text="${#numbers.formatDecimal(pedidos.maoObra, 0, 'POINT', 2, 'COMMA')}"></span></div>
-
-					  <div>Total do pedido: <span th:text="${#numbers.formatDecimal(pedidos.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span></div>
-					  <div>Lucro: <span th:text="${#numbers.formatDecimal(pedidos.lucro, 0, 'POINT', 2, 'COMMA')}"></span></div>
 					  <div>Data entrada: <span th:text="${#temporals.format(pedidos.dataEntrada,'dd/MM/yyyy')}"></span></div>
 					  <div class="d-flex  align-items:-center">
 					  <div><span>Data saída: </span></div>
 					  <div th:if="${pedidos.dataSaida!=null}" th:text="${#temporals.format(pedidos.dataSaida,'dd/MM/yyyy')}"></div> 
 						</div>
-					
-					  
-				<div class="d-flex justify-content-around">
-
+					<div class="d-flex justify-content-around">
 					<a href="#" th:href="@{'/'+'cliente'+'/alterarpedido'+'/'+${pedidos.id}+'/'+${clienteid}}"><button type="button" class="btn btn-outline-warning">Alterar pedido</button></a>	
-					<a href="#" th:href="@{'/'+'cliente'+'/menu'}"><button type="button" class="btn btn-outline-info">Voltar para o Menu</button></a>					  
-					<a href="#" th:href="@{'/'+'cliente'+'/alterarpedido'+'/'+${pedidos.id}+'/'+${clienteid}}"><button type="button" class="btn btn-outline-warning">Encerrar pedido</button></a>	
+					<a href="#" th:href="@{'/'+'cliente'+'/menu'}"><button type="button" class="btn btn-outline-info">Voltar para o Menu</button></a>			
+					<a href="#" th:href="@{'/'+'cliente'+'/encerrar'+'/'+${pedidos.id}+'/'+${clienteid}}"><button type="button" class="btn btn-outline-danger">Encerrar pedido</button></a>					  		  
 	   			</div>
 	   </div>
 			

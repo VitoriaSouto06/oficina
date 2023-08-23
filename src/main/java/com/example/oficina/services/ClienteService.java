@@ -34,10 +34,14 @@ public class ClienteService {
 	public void update(Cliente cliente, Long id) {
 		Optional<Cliente> cliente2 = clienteRepository.findById(id);
 		Cliente cliente3 = cliente2.get();
-		cliente3.setNomeCliente(cliente.getNomeCliente());
-		cliente3.setTelefoneCliente(cliente.getTelefoneCliente());
+		if(!cliente.getNomeCliente().isBlank() && !cliente.getNomeCliente().isEmpty()) {
+			cliente3.setNomeCliente(cliente.getNomeCliente());
+		} 
+		if(!cliente.getTelefoneCliente().isBlank() && !cliente.getTelefoneCliente().isEmpty()) {
+			cliente3.setTelefoneCliente(cliente.getTelefoneCliente());
+			
+		}
 		clienteRepository.save(cliente3);
-		
 	}
 	
 	public List<Cliente> findByNome(String nome) {

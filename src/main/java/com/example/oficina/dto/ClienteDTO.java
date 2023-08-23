@@ -92,7 +92,16 @@ public class ClienteDTO implements Serializable{
 		cliente.setTelefoneCliente(clienteDto.getTelefoneCliente());
 		return cliente;
 	}
-	
+	public  Cliente alterarCliente(ClienteDTO clienteDto) {
+		Cliente cliente = new Cliente();
+		if(clienteDto.getNomeCliente() != null && !clienteDto.getNomeCliente().isEmpty()) {
+		cliente.setNomeCliente(clienteDto.getNomeCliente());
+		}
+		if(clienteDto.getTelefoneCliente() != null && !clienteDto.getTelefoneCliente().isEmpty()) {
+		cliente.setTelefoneCliente(clienteDto.getTelefoneCliente());
+		}
+		return cliente;
+	}
 	
 		
 }

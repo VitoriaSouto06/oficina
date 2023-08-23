@@ -48,16 +48,13 @@ public class Pedido implements Serializable{
 	private LocalDate dataEntrada;
 	
 	@Column(name="data_saida")
-	@NotNull
 	private LocalDate dataSaida;
 	
 	@ManyToOne
 	@JoinColumn(name="client_id")
 	private  Cliente cliente;
 
-	private BigDecimal valorTotal = BigDecimal.ZERO;
 	
-	private BigDecimal lucro = BigDecimal.ZERO;
 	
 	public Pedido() {
 		super();
@@ -66,7 +63,7 @@ public class Pedido implements Serializable{
 
 
 	public Pedido(Long id, String nomeAparelho, String modeloAparelho, BigDecimal pecaValor, BigDecimal maoObra,
-			LocalDate dataEntrada, LocalDate dataSaida, Cliente cliente) {
+			LocalDate dataEntrada, Cliente cliente) {
 		super();
 		this.id = id;
 		this.nomeAparelho = nomeAparelho;
@@ -74,21 +71,10 @@ public class Pedido implements Serializable{
 		this.pecaValor = pecaValor;
 		this.maoObra = maoObra;
 		this.dataEntrada = dataEntrada;
-		this.dataSaida = dataSaida;
 		this.cliente = cliente;
 	}
 
 
-	public void totalPedido() {
-		valorTotal = valorTotal.add(maoObra);
-		valorTotal = valorTotal.add(pecaValor);
-		
-	}
-	
-	public void lucro() {
-		lucro = lucro.add(valorTotal);
-		lucro = lucro.subtract(pecaValor);
-	}
 
 	public Long getId() {
 		return id;
@@ -182,32 +168,6 @@ public class Pedido implements Serializable{
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-
-
-	
-
-	public BigDecimal getValorTotal() {
-		return valorTotal;
-	}
-
-
-
-	public void setValorTotal(BigDecimal valorTotal) {
-		this.valorTotal = valorTotal;
-	}
-
-
-	
-
-	public BigDecimal getLucro() {
-		return lucro;
-	}
-
-
-
-	public void setLucro(BigDecimal lucro) {
-		this.lucro = lucro;
 	}
 
 

@@ -1,6 +1,9 @@
 package com.example.oficina.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +60,7 @@ public class ClienteController {
 	public String salvarCliente(@Valid ClienteDTO clienteDto,BindingResult result) {
 		try{Cliente cliente = clienteDto.toCliente(clienteDto);
 		clienteService.save(cliente);
-		return "cadastrocliente";
+		return "redirect:/cliente/menu";
 	}catch(ConstraintViolationException e) {
 		return "cadastrocliente";
 	}
@@ -83,7 +86,7 @@ public class ClienteController {
 		
 	}
 	@PostMapping("salvaralteracaocliente/{id}")
-	public String salvarAlteracaoCliente(@Valid ClienteDTO clienteDto, @PathVariable String id) {
+	public String salvarAlteracaoCliente(ClienteDTO clienteDto, @PathVariable String id) {
 		try {Long id2 = Long.parseLong(id);
 		Cliente cliente = clienteDto.toCliente(clienteDto);
 		clienteService.update(cliente, id2);
@@ -100,7 +103,6 @@ public class ClienteController {
 		Long id2 = Long.parseLong(id);
 		Optional<Cliente> cliente = clienteService.findById(id2);
 		List<Pedido> pedidos = clienteService.findById(id2).get().getPedidos();
-		
 		model.addAttribute("clienteNome", cliente.get().getNomeCliente());
 		model.addAttribute("clienteTelefone", cliente.get().getTelefoneCliente());
 		model.addAttribute("listaPedidos", pedidos);
@@ -124,7 +126,7 @@ public class ClienteController {
 	public String salvarPedido(PedidoDTO pedidoDto,@PathVariable String id) {
 		Long id2 = Long.parseLong(id);
 		Optional<Cliente> cliente = clienteService.findById(id2);
-		Pedido pedido= pedidoDto.toPedido(pedidoDto,cliente.get());
+		Pedido pedido= pedidoDto.novoPedido(pedidoDto,cliente.get());
 		pedidoService.save(pedido);
 		return "redirect:/cliente/menu";
 		
@@ -146,20 +148,18 @@ public class ClienteController {
 		model.addAttribute("pedidoValorPeca", pedido2.getPecaValor());
 		model.addAttribute("pedidoValorMao", pedido2.getMaoObra());
 		model.addAttribute("pedidoDataEntrada", pedido2.getDataEntrada());
-		model.addAttribute("pedidoDataSaida", pedido2.getDataSaida());
 
 		return "alterarpedido";
 		
 	}
 	@PostMapping("salvaralteracaopedido/{id}/{clienteid}")
-	public String salvarAlteracaoPedido(@Valid PedidoDTO pedidoDto, @PathVariable String id, @PathVariable String clienteid) {
+	public String salvarAlteracaoPedido(PedidoDTO pedidoDto, @PathVariable String id, @PathVariable String clienteid) {
 		try {Long id2 = Long.parseLong(id);
 			Long clienteid2 = Long.parseLong(clienteid);
 			Optional<Cliente> cliente = clienteService.findById(clienteid2);
 			Cliente cliente2 = cliente.get();
-		Pedido pedido = pedidoDto.toPedido(pedidoDto,cliente2);
-		System.out.println(pedido.getNomeAparelho());
-		pedidoService.update(pedido,id2);
+			Pedido pedido = pedidoDto.toPedido(pedidoDto,cliente2);
+			pedidoService.update(pedido,id2);
 		return "redirect:/cliente/menu";
 		}catch(ConstraintViolationException e) {
 			return "cadastrocliente";
@@ -169,7 +169,28 @@ public class ClienteController {
 	@GetMapping("pesquisa")
 	public String pesquisarCliente(@RequestParam("nome") String nome,Model model) {
 		List<Cliente> clientes = clienteService.findByNome(nome);
-		model.addAttribute("listaClientes", clientes);
-		return "principal";	
+		if(!clientes.isEmpty()) {
+			model.addAttribute("listaClientes", clientes);
+			return "principal";	
+		}else {
+			return "naoencontrado";
+		}
+		
+	}
+	
+	@GetMapping("encerrar/{id}/{clienteid}")
+	public String encerrarPedido(@PathVariable String id, @PathVariable String clienteid,Model model, PedidoDTO pedidoDto) {
+		LocalDate now = LocalDate.now(); 
+		Long id2 = Long.parseLong(id);
+		Long clienteid2 = Long.parseLong(clienteid);
+
+		Optional<Pedido> pedido = pedidoService.findById(id2);
+		Optional<Cliente> cliente = clienteService.findById(clienteid2);
+		Pedido pedido2 = pedido.get();
+		Cliente cliente2 = cliente.get();
+		pedido2.setDataSaida(now);
+		pedidoService.save(pedido2);
+		return "redirect:/cliente/menu";
+		
 	}
 }

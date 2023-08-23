@@ -30,12 +30,27 @@ public class PedidoService {
 	public void update(Pedido pedido,Long idPedido) {
 		Optional<Pedido> pedido1 = pedidoRepository.findById(idPedido);
 		Pedido pedido3 = pedido1.get();
-		pedido3.setNomeAparelho(pedido.getNomeAparelho());
-		pedido3.setModeloAparelho(pedido.getModeloAparelho());
-		pedido3.setPecaValor(pedido.getPecaValor());
-		pedido3.setMaoObra(pedido.getMaoObra());
-		pedido3.setDataEntrada(pedido.getDataEntrada());
-		pedido3.setDataSaida(pedido.getDataSaida());
+		if(!pedido.getNomeAparelho().isBlank() && !pedido.getNomeAparelho().isEmpty()) {
+			pedido3.setNomeAparelho(pedido.getNomeAparelho());
+		}
+		if(!pedido.getModeloAparelho().isBlank() && !pedido.getModeloAparelho().isEmpty()) {
+			pedido3.setModeloAparelho(pedido.getModeloAparelho());
+		}
+		if(pedido.getPecaValor()!=null) {
+			if(!pedido.getPecaValor().toString().isBlank() && !pedido.getPecaValor().toString().isEmpty()) {
+			pedido3.setPecaValor(pedido.getPecaValor());
+			}
+		 }
+		if(pedido.getMaoObra()!=null) {
+			if(!pedido.getMaoObra().toString().isBlank() && !pedido.getMaoObra().toString().isEmpty()) {
+			pedido3.setMaoObra(pedido.getMaoObra());
+			}
+		}
+		if(pedido.getDataEntrada()!=null) {
+		 if(!pedido.getDataEntrada().toString().isBlank() &&!pedido.getDataEntrada().toString().isEmpty()) {
+			pedido3.setDataEntrada(pedido.getDataEntrada());
+			}
+		}
 		pedidoRepository.save(pedido3);
 	
 		

@@ -8,6 +8,13 @@
      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+ integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+ crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+    
     <title>Alterar Pedido</title>
 </head>
 <body>
@@ -25,38 +32,34 @@
 				<div  class="card-body">
 						<div class="mb-3">
 						<label for="nomeAparelho">Nome do aparelho</label>
-						<input required class="form-control" name="nomeAparelho" th:placeholder="${pedidoNomeAparelho}"/>
+						<input  class="form-control"  name="nomeAparelho" th:placeholder="${pedidoNomeAparelho}"/>
 					
 					</div>
 					<div class="mb-3">
 						<label for="modeloAparelho">Modelo do aparelho</label>
-						<input required class="form-control" name="modeloAparelho" th:placeholder="${pedidoNomeModelo}"/>
+						<input  class="form-control" name="modeloAparelho" th:placeholder="${pedidoNomeModelo}"/>
 						
 					</div>
 				
 					<div class="mb-3">
 						<label for="pecaValor">Valor da peça</label>
-						<input required class="form-control" name="pecaValor" th:placeholder="${pedidoValorPeca}"/>
+						<input class="form-control" id="pecaValor" name="pecaValor" th:placeholder="${#numbers.formatDecimal(pedidoValorPeca, 0, 'POINT', 2, 'COMMA')}"/>
 						
 					</div>
 					
 					<div class="mb-3">
 						<label for="maoObra">Valor da mão de obra</label>
-						<input required class="form-control" name="maoObra" th:placeholder="${pedidoValorMao}"/>
+						<input class="form-control" id="maoObra" name="maoObra" th:placeholder="${#numbers.formatDecimal(pedidoValorMao, 0, 'POINT', 2, 'COMMA')}"/>
 						
 					</div>
 					
 					<div class="mb-3">
 						<label for="dataEntrada">Data de entrada</label>
-						<input type="text" required class="form-control" name="dataEntrada" th:placeholder="${pedidoDataEntrada}"/>
+						<input type="date"  class="form-control" name="dataEntrada" th:placeholder="${#temporals.format(pedidoDataEntrada,'dd/MM/yyyy')}"/>
 						
 					</div>
 					
-					<div class="mb-3">
-						<label for="dataSaida">Data de saída</label>
-						<input type="text"  class="form-control" name="dataSaida" th:placeholder="${pedidoDataSaida}"/>
-						
-					</div>
+				
 						<div class="d-flex justify-content-around">
 							
 							<div class="mb-3">
@@ -72,6 +75,9 @@
 			</div>
 	</div>
 	</form>
-	
+	<script>
+	 $('#pecaValor').mask("#.##0,00", { reverse: true });
+	  $('#maoObra').mask("#.##0,00", { reverse: true });
+	 </script>
 </body>
 </html>
