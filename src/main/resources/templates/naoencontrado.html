@@ -17,21 +17,16 @@
 </head>
 <body>
 <div class="container">
-		<div class="card">
-			<div class="card-header">
-				<h5 class="display-4">
-					Não encontrado
-					
-				</h5>
-				<div>
-					Não existe clientes com esse nome, tente novamente
-					</div>
-				
-			</div>
-		</div>
+		
 		<div>
-					<a href="#" th:href="@{'/'+'cliente'+'/menu'}"><button type="button"
+			<div class="alert alert-danger" role="alert">
+				<div class="d-flex justify-content-around">
+  Não existe nenhum cliente com esse nome, tente novamente!
+  <a href="#" th:href="@{'/'+'cliente'+'/menu'}"><button type="button"
 							class="btn btn-outline-info">Voltar para o menu</button></a>
+							</div>
+</div>
+					
 			</div>
 </body>
 </html>

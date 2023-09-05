@@ -63,6 +63,9 @@ public class Pedido implements Serializable{
 	@Column(name="lucro")
 	private BigDecimal lucro = BigDecimal.ZERO;
 	
+	@Column(name="status_pedido")
+	private String statusPedido;
+	
 	public Pedido() {
 		super();
 	}
@@ -212,6 +215,18 @@ public class Pedido implements Serializable{
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+
+
+	public String getStatusPedido() {
+		return statusPedido;
+	}
+
+
+
+	public void setStatusPedido(String statusPedido) {
+		this.statusPedido = statusPedido;
 	}
 
 

@@ -194,4 +194,34 @@ public class ClienteController {
 		return "redirect:/cliente/menu";
 		
 	}
+	@GetMapping("aprovado/{id}/{clienteid}")
+	public String pedidoAprovado(@PathVariable String id, @PathVariable String clienteid,Model model, PedidoDTO pedidoDto) {
+		LocalDate now = LocalDate.now(); 
+		Long id2 = Long.parseLong(id);
+		Long clienteid2 = Long.parseLong(clienteid);
+
+		Optional<Pedido> pedido = pedidoService.findById(id2);
+		Optional<Cliente> cliente = clienteService.findById(clienteid2);
+		Pedido pedido2 = pedido.get();
+		Cliente cliente2 = cliente.get();
+		pedido2.setStatusPedido("Aprovado");
+		pedidoService.save(pedido2);
+		return "redirect:/cliente/menu";
+		
+	}
+	@GetMapping("reprovado/{id}/{clienteid}")
+	public String pedidoReprovado(@PathVariable String id, @PathVariable String clienteid,Model model, PedidoDTO pedidoDto) {
+		LocalDate now = LocalDate.now(); 
+		Long id2 = Long.parseLong(id);
+		Long clienteid2 = Long.parseLong(clienteid);
+
+		Optional<Pedido> pedido = pedidoService.findById(id2);
+		Optional<Cliente> cliente = clienteService.findById(clienteid2);
+		Pedido pedido2 = pedido.get();
+		Cliente cliente2 = cliente.get();
+		pedido2.setStatusPedido("Reprovado");
+		pedidoService.save(pedido2);
+		return "redirect:/cliente/menu";
+		
+	}
 }
