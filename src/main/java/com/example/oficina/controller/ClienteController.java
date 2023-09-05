@@ -148,6 +148,7 @@ public class ClienteController {
 		model.addAttribute("pedidoValorPeca", pedido2.getPecaValor());
 		model.addAttribute("pedidoValorMao", pedido2.getMaoObra());
 		model.addAttribute("pedidoDataEntrada", pedido2.getDataEntrada());
+		model.addAttribute("observacao", pedido2.getObservacao());
 
 		return "alterarpedido";
 		

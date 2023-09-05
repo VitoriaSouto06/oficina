@@ -30,6 +30,7 @@ public class PedidoDTO implements Serializable{
 	private String pecaValor;
 	private String maoObra;
 	private String dataEntrada;
+	private String observacao;
 	private Cliente cliente;
 	
 	
@@ -39,7 +40,7 @@ public class PedidoDTO implements Serializable{
 
 
 	public PedidoDTO(Long id, String nomeAparelho, String modeloAparelho, String pecaValor, String maoObra,
-			String dataEntrada, Cliente cliente) {
+			String dataEntrada, String observacao, Cliente cliente) {
 		super();
 		this.id = id;
 		this.nomeAparelho = nomeAparelho;
@@ -47,6 +48,7 @@ public class PedidoDTO implements Serializable{
 		this.pecaValor = pecaValor;
 		this.maoObra = maoObra;
 		this.dataEntrada = dataEntrada;
+		this.observacao = observacao;
 		this.cliente = cliente;
 	}
 
@@ -121,6 +123,19 @@ public class PedidoDTO implements Serializable{
 		this.cliente = cliente;
 	}
 	
+	
+	
+	
+	public String getObservacao() {
+		return observacao;
+	}
+
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+
 	public Pedido novoPedido(PedidoDTO pedidoDto,Cliente cliente) {
 		Pedido pedido = new Pedido();
 		pedido.setNomeAparelho(pedidoDto.getNomeAparelho());
@@ -134,7 +149,10 @@ public class PedidoDTO implements Serializable{
 		String dataEntradaStr = pedidoDto.getDataEntrada();
 		LocalDate dataEntrada = LocalDate.parse(dataEntradaStr); 
 		pedido.setDataEntrada(dataEntrada);
+		pedido.setObservacao(pedidoDto.getObservacao());
 		pedido.setCliente(cliente);
+		pedido.totalPedido();
+		pedido.totalLucro();
 		return pedido;
 	}
 	
@@ -142,15 +160,18 @@ public class PedidoDTO implements Serializable{
 		Pedido pedido = new Pedido();
 				pedido.setNomeAparelho(pedidoDto.getNomeAparelho());
 				pedido.setModeloAparelho(pedidoDto.getModeloAparelho());
+				pedido.setObservacao(pedidoDto.getObservacao());
 		 if(pedidoDto.getPecaValor()!= null && !pedidoDto.getPecaValor().isEmpty()) {
 				String pecaValorStr = pedidoDto.getPecaValor().replace(",", ".");
 				BigDecimal pecaValor = new BigDecimal(pecaValorStr);
 				pedido.setPecaValor(pecaValor);
+			
 		 }
 		 if(pedidoDto.getMaoObra() != null && !pedidoDto.getMaoObra().isEmpty()) {
 			String maoObraStr = pedidoDto.getMaoObra().replace(",", ".");
 				BigDecimal maoObra = new BigDecimal(maoObraStr);
 				pedido.setMaoObra(maoObra);
+			
 			
 		
 		}
@@ -160,6 +181,8 @@ public class PedidoDTO implements Serializable{
 				pedido.setDataEntrada(dataEntrada);
 			
 			}
+		
+		 
 		
 		pedido.setCliente(cliente);
 		return pedido;

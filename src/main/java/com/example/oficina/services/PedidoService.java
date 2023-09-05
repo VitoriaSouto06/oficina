@@ -51,6 +51,11 @@ public class PedidoService {
 			pedido3.setDataEntrada(pedido.getDataEntrada());
 			}
 		}
+		if(!pedido.getObservacao().isBlank() && !pedido.getObservacao().isEmpty()) {
+			pedido3.setObservacao(pedido.getObservacao());
+		}
+		pedido3.atualizarTotalPedido();
+		pedido3.atulizarLucro();
 		pedidoRepository.save(pedido3);
 	
 		

@@ -53,8 +53,15 @@ public class Pedido implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="client_id")
 	private  Cliente cliente;
-
 	
+	@Column(name="total_pedido")
+	private BigDecimal totalPedido = BigDecimal.ZERO;
+	
+	@Column(name="observacao",length=900)
+	private String observacao;
+	
+	@Column(name="lucro")
+	private BigDecimal lucro = BigDecimal.ZERO;
 	
 	public Pedido() {
 		super();
@@ -63,7 +70,7 @@ public class Pedido implements Serializable{
 
 
 	public Pedido(Long id, String nomeAparelho, String modeloAparelho, BigDecimal pecaValor, BigDecimal maoObra,
-			LocalDate dataEntrada, Cliente cliente) {
+			LocalDate dataEntrada,String observacao, Cliente cliente) {
 		super();
 		this.id = id;
 		this.nomeAparelho = nomeAparelho;
@@ -72,6 +79,7 @@ public class Pedido implements Serializable{
 		this.maoObra = maoObra;
 		this.dataEntrada = dataEntrada;
 		this.cliente = cliente;
+		this.observacao = observacao;
 	}
 
 
@@ -170,7 +178,64 @@ public class Pedido implements Serializable{
 		this.cliente = cliente;
 	}
 
+	
 
+	public BigDecimal getTotalPedido() {
+		return totalPedido;
+	}
+
+
+
+	public void setTotalPedido(BigDecimal totalPedido) {
+		this.totalPedido = totalPedido;
+	}
+
+	
+
+	public BigDecimal getLucro() {
+		return lucro;
+	}
+
+
+
+	public void setLucro(BigDecimal lucro) {
+		this.lucro = lucro;
+	}
+
+
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+
+
+	public void totalLucro() {
+		lucro = lucro.add(maoObra);
+	}
+	
+	public void atulizarLucro() {
+		lucro = BigDecimal.ZERO;
+		lucro = lucro.add(maoObra);
+	}
+	public void totalPedido() {
+		totalPedido = totalPedido.add(maoObra);
+		totalPedido = totalPedido.add(pecaValor);
+		
+	}
+	
+	public void atualizarTotalPedido() {
+		totalPedido = BigDecimal.ZERO;
+		totalPedido = totalPedido.add(maoObra);
+		totalPedido = totalPedido.add(pecaValor);
+		
+	}
 
 	@Override
 	public int hashCode() {
