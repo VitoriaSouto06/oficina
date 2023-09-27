@@ -43,7 +43,10 @@ public class ClienteController {
 	
 	@Autowired
 	PedidoService pedidoService;
-	
+	@GetMapping("inicio")
+	public String inicio(Model model) {
+		return "inicio";	
+	}
 	@GetMapping("menu")
 	public String novoCliente(Model model) {
 		List<Cliente> listaClientes = clienteService.findAll();
