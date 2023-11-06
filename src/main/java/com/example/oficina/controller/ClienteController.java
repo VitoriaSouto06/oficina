@@ -194,7 +194,7 @@ public class ClienteController {
 		Cliente cliente2 = cliente.get();
 		pedido2.setDataSaida(now);
 		pedidoService.save(pedido2);
-		return "redirect:/cliente/menu";
+		return "redirect:/cliente/pedidos/"+clienteid2;
 		
 	}
 	@GetMapping("aprovado/{id}/{clienteid}")
@@ -209,7 +209,7 @@ public class ClienteController {
 		Cliente cliente2 = cliente.get();
 		pedido2.setStatusPedido("Aprovado");
 		pedidoService.save(pedido2);
-		return "redirect:/cliente/menu";
+		return "redirect:/cliente/pedidos/"+clienteid2;
 		
 	}
 	@GetMapping("reprovado/{id}/{clienteid}")
@@ -224,7 +224,7 @@ public class ClienteController {
 		Cliente cliente2 = cliente.get();
 		pedido2.setStatusPedido("Reprovado");
 		pedidoService.save(pedido2);
-		return "redirect:/cliente/menu";
+		return "redirect:/cliente/pedidos/"+clienteid2;
 		
 	}
 }
