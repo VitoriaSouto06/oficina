@@ -30,7 +30,10 @@ public class PedidoDTO implements Serializable{
 	private String pecaValor;
 	private String maoObra;
 	private String dataEntrada;
+	private String dataSaida;
 	private String observacao;
+	private String peca;
+	private String defeito;
 	private Cliente cliente;
 	
 	
@@ -40,7 +43,7 @@ public class PedidoDTO implements Serializable{
 
 
 	public PedidoDTO(Long id, String nomeAparelho, String modeloAparelho, String pecaValor, String maoObra,
-			String dataEntrada, String observacao, Cliente cliente) {
+			String dataEntrada, String dataSaida, String observacao,String peca, String defeito,Cliente cliente) {
 		super();
 		this.id = id;
 		this.nomeAparelho = nomeAparelho;
@@ -48,7 +51,10 @@ public class PedidoDTO implements Serializable{
 		this.pecaValor = pecaValor;
 		this.maoObra = maoObra;
 		this.dataEntrada = dataEntrada;
+		this.dataSaida = dataSaida;
 		this.observacao = observacao;
+		this.peca = peca;
+		this.defeito = defeito;
 		this.cliente = cliente;
 	}
 
@@ -112,6 +118,14 @@ public class PedidoDTO implements Serializable{
 		this.dataEntrada = dataEntrada;
 	}
 
+	public String getDataSaida() {
+		return dataSaida;
+	}
+
+
+	public void setDataSaida(String dataSaida) {
+		this.dataSaida = dataSaida;
+	}
 
 
 	public Cliente getCliente() {
@@ -135,8 +149,27 @@ public class PedidoDTO implements Serializable{
 		this.observacao = observacao;
 	}
 
+	public String getPeca() {
+		return peca;
+	}
+
+
+	public void setPeca(String peca) {
+		this.peca = peca;
+	}
+	
+	public String getDefeito() {
+		return defeito;
+	}
+
+
+	public void setDefeito(String defeito) {
+		this.defeito = defeito;
+	}
 
 	public Pedido novoPedido(PedidoDTO pedidoDto,Cliente cliente) {
+		String datastr = "0001-01-01";
+		LocalDate zerado = LocalDate.parse(datastr);
 		Pedido pedido = new Pedido();
 		pedido.setNomeAparelho(pedidoDto.getNomeAparelho());
 		pedido.setModeloAparelho(pedidoDto.getModeloAparelho());
@@ -150,7 +183,11 @@ public class PedidoDTO implements Serializable{
 		LocalDate dataEntrada = LocalDate.parse(dataEntradaStr); 
 		pedido.setDataEntrada(dataEntrada);
 		pedido.setObservacao(pedidoDto.getObservacao());
+		pedido.setPeca(pedidoDto.getPeca());
+		String defeito = pedidoDto.getDefeito();
+		pedido.setDefeito(defeito);
 		pedido.setCliente(cliente);
+		pedido.setDataSaida(zerado);
 		pedido.totalPedido();
 		pedido.totalLucro();
 		return pedido;
@@ -161,6 +198,8 @@ public class PedidoDTO implements Serializable{
 				pedido.setNomeAparelho(pedidoDto.getNomeAparelho());
 				pedido.setModeloAparelho(pedidoDto.getModeloAparelho());
 				pedido.setObservacao(pedidoDto.getObservacao());
+				pedido.setPeca(pedidoDto.getPeca());
+				pedido.setDefeito(pedidoDto.getDefeito());
 		 if(pedidoDto.getPecaValor()!= null && !pedidoDto.getPecaValor().isEmpty()) {
 				String pecaValorStr = pedidoDto.getPecaValor().replace(",", ".");
 				BigDecimal pecaValor = new BigDecimal(pecaValorStr);
@@ -181,7 +220,12 @@ public class PedidoDTO implements Serializable{
 				pedido.setDataEntrada(dataEntrada);
 			
 			}
-		
+		 if(pedidoDto.getDataSaida()!= null && !pedidoDto.getDataSaida().isEmpty()) {
+				String dataSaidaStr = pedidoDto.getDataSaida();
+				LocalDate dataSaida = LocalDate.parse(dataSaidaStr); 
+				pedido.setDataSaida(dataSaida);
+			
+			}
 		 
 		
 		pedido.setCliente(cliente);

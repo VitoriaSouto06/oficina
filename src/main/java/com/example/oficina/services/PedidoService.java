@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.oficina.model.Cliente;
 import com.example.oficina.model.Pedido;
@@ -27,9 +28,20 @@ public class PedidoService {
 	public Optional<Pedido> findById(Long id) {
 		return pedidoRepository.findById(id);
 	}
+	
+	@Transactional
+	public void excluirTodosPedidos(Long id) {
+		pedidoRepository.excluirTodosPedidos(id);
+	}
+	
+	@Transactional
+	public void excluirPedido(Long id) {
+		pedidoRepository.excluirPedido(id);
+	}
 	public void update(Pedido pedido,Long idPedido) {
 		Optional<Pedido> pedido1 = pedidoRepository.findById(idPedido);
 		Pedido pedido3 = pedido1.get();
+		
 		if(!pedido.getNomeAparelho().isBlank() && !pedido.getNomeAparelho().isEmpty()) {
 			pedido3.setNomeAparelho(pedido.getNomeAparelho());
 		}
@@ -51,6 +63,25 @@ public class PedidoService {
 			pedido3.setDataEntrada(pedido.getDataEntrada());
 			}
 		}
+		
+		if(pedido.getDefeito()!=null) {
+			 if(!pedido.getDefeito().toString().isBlank() &&!pedido.getDefeito().toString().isEmpty()) {
+				pedido3.setDefeito(pedido.getDefeito());
+				}
+			}
+		if(pedido.getDataSaida()!=null) {
+			 if(!pedido.getDataSaida().toString().isBlank() &&!pedido.getDataSaida().toString().isEmpty()) {
+				pedido3.setDataSaida(pedido.getDataSaida());
+				}
+			}
+			
+			
+		if(pedido.getPeca()!=null) {
+			 if(!pedido.getPeca().toString().isBlank() &&!pedido.getPeca().toString().isEmpty()) {
+				pedido3.setPeca(pedido.getPeca());
+				}
+			}
+			
 		if(!pedido.getObservacao().isBlank() && !pedido.getObservacao().isEmpty()) {
 			pedido3.setObservacao(pedido.getObservacao());
 		}

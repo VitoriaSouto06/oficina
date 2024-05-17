@@ -22,7 +22,7 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-header">
-				<h1 class="display-4">
+				<h1 class="display-5 d-flex justify-content-center">
 					Pedidos cadastrados
 				</h1>
 			</div>
@@ -35,8 +35,12 @@
 
 
 		</nav>
-
-
+		<div class="d-flex justify-content-end">
+<a href="/cliente/inicio"><button type="button"
+								class="btn btn-outline-success mh-100"style="width: 200px; height: 40px;">Voltar para pagina inicial</button></a>
+	</div>
+	
+	<div class="col py-3 px-md-5"></div>
 
 		<table class="table">
 			<thead>
@@ -44,6 +48,8 @@
 
 					<th scope="col">Nome</th>
 					<th scope="col">Telefone</th>
+					<th scope="col">Id do cliente</th>
+				
 
 				</tr>
 			</thead>
@@ -55,6 +61,10 @@
 					<td>
 						<div th:text=" ${clienteTelefone}"> Nome </div>
 					</td>
+					<td>
+						<div th:text=" ${clienteid}"> Nome </div>
+					</td>
+				
 
 	</div>
 	</td>
@@ -72,30 +82,50 @@
 				
 					<div>
 						<div>Id do pedido: <span th:text="${pedidos.id}"> </span></div>
+							<div class="col py-3 px-md-5"></div>
 						<div>Nome do aparelho: <span th:text="${pedidos.nomeAparelho}"> </span></div>
+						<div class="col py-3 px-md-5"></div>
 						<div>Modelo do aparelho: <span th:text="${pedidos.modeloAparelho}"> </span></div>
+						<div class="col py-3 px-md-5"></div>
 						<div>Valor da peça: <span
 								th:text="${#numbers.formatDecimal(pedidos.pecaValor, 0, 'POINT', 2, 'COMMA')}"></span>
 						</div>
+						<div class="col py-3 px-md-5"></div>
 						<div>Valor da mão de obra: <span
 								th:text="${#numbers.formatDecimal(pedidos.maoObra, 0, 'POINT', 2, 'COMMA')}"></span>
 						</div>
+						<div class="col py-3 px-md-5"></div>
 						<div>Total do pedido: <span
 								th:text="${#numbers.formatDecimal(pedidos.totalPedido, 0, 'POINT', 2, 'COMMA')}"></span>
 						</div>
+						<div class="col py-3 px-md-5"></div>
 						<div>Lucro: <span
 								th:text="${#numbers.formatDecimal(pedidos.lucro, 0, 'POINT', 2, 'COMMA')}"></span></div>
+						<div class="col py-3 px-md-5"></div>
 						<div>Data entrada: <span
 								th:text="${#temporals.format(pedidos.dataEntrada,'dd/MM/yyyy')}"></span></div>
+						<div class="col py-3 px-md-5"></div>
 						<div class="d-flex  align-items:-center">
 							<div><span>Data saída: </span></div>
 							<div th:if="${pedidos.dataSaida!=null}"
 								th:text="${#temporals.format(pedidos.dataSaida,'dd/MM/yyyy')}"></div>
 						</div>
+						<div class="col py-3 px-md-5"></div>
+						<div>Peças:</div>
+						<div>
+							<span th:text="${pedidos.peca}">descrição das peças com problema</span>
+						</div>
+						<div class="col py-3 px-md-5"></div>
+						<div>Defeitos:</div>
+						<div>
+							<span th:text="${pedidos.defeito}">descrição dos defeitos</span>
+						</div>
+						<div class="col py-3 px-md-5"></div>
 						<div>Observações:</div>
 						<div>
 							<span th:text="${pedidos.observacao}">descrição do pedido</span>
 						</div>
+						<div class="col py-3 px-md-5"></div>
 						<div class="d-flex  align-items:-center">
 							<div>Status do Pedido: </div>
 							<div th:if="${pedidos.statusPedido!=null}" th:text=" ${pedidos.statusPedido}"></div>
@@ -106,18 +136,19 @@
 					<div class="d-flex flex-column">
 						 <div class="p-2"><a href="#"
 								th:href="@{'/'+'cliente'+'/alterarpedido'+'/'+${pedidos.id}+'/'+${clienteid}}"><button
-									type="button" class="btn btn-outline-warning">Alterar pedido</button></a> </div>
+									type="button" class="btn btn-outline-success mh-100" style="width: 200px; height: 40px;">Alterar pedido</button></a> </div>
 					 <div class="p-2"><a href="#"
 								th:href="@{'/'+'cliente'+'/encerrar'+'/'+${pedidos.id}+'/'+${clienteid}}"><button
-									type="button" class="btn btn-outline-danger">Encerrar pedido</button></a> </div>
+									type="button" class="btn btn-outline-danger mh-100" style="width: 200px; height: 40px;">Encerrar pedido</button></a> </div>
 						 <div class="p-2"><a href="#"
 								th:href="@{'/'+'cliente'+'/aprovado'+'/'+${pedidos.id}+'/'+${clienteid}}"><button
-									type="button" class="btn btn-outline-success">Pedido Aprovado</button></a> </div>
+									type="button" class="btn btn-outline-success mh-100" style="width: 200px; height: 40px;">Pedido Aprovado</button></a> </div>
 									 <div class="p-2"><a href="#"
 								th:href="@{'/'+'cliente'+'/reprovado'+'/'+${pedidos.id}+'/'+${clienteid}}"><button
-									type="button" class="btn btn-outline-danger">Pedido Reprovado</button></a> </div>
-									 <div class="p-2"><a href="#" th:href="@{'/'+'cliente'+'/inicio'}"><button type="button"
-									class="btn btn-outline-info">Voltar para o Menu</button></a> </div>
+									type="button" class="btn btn-outline-danger mh-100" style="width: 200px; height: 40px;">Pedido Reprovado</button></a> </div>
+															
+								 <div class="p-2">
+								<a href="#" th:href="@{'/'+'cliente'+'/excluirpedido'+'/'+${pedidos.id}}"><button type="button" class="btn btn-outline-danger" style="width: 200px; height: 40px;">Excluir pedido</button></a></div>
 					</div>
 				</div>
 		

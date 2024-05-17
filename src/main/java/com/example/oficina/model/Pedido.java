@@ -59,6 +59,10 @@ public class Pedido implements Serializable{
 	
 	@Column(name="observacao",length=900)
 	private String observacao;
+	@Column(name="peca",length=1500)
+	private String peca;
+	@Column(name="defeito",length=1500)
+	private String defeito;
 	
 	@Column(name="lucro")
 	private BigDecimal lucro = BigDecimal.ZERO;
@@ -73,7 +77,7 @@ public class Pedido implements Serializable{
 
 
 	public Pedido(Long id, String nomeAparelho, String modeloAparelho, BigDecimal pecaValor, BigDecimal maoObra,
-			LocalDate dataEntrada,String observacao, Cliente cliente) {
+			LocalDate dataEntrada,String observacao,String peca,String defeito, Cliente cliente) {
 		super();
 		this.id = id;
 		this.nomeAparelho = nomeAparelho;
@@ -83,6 +87,8 @@ public class Pedido implements Serializable{
 		this.dataEntrada = dataEntrada;
 		this.cliente = cliente;
 		this.observacao = observacao;
+		this.defeito = defeito;
+		this.peca = peca;
 	}
 
 
@@ -212,11 +218,26 @@ public class Pedido implements Serializable{
 	}
 
 
-
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
 
+	public void setPeca(String peca) {
+		this.peca = peca;
+	}
+
+	public String getPeca() {
+		return peca;
+	}
+
+
+	public void setDefeito(String defeito) {
+		this.defeito = defeito;
+	}
+
+	public String getDefeito() {
+		return defeito;
+	}
 
 
 	public String getStatusPedido() {

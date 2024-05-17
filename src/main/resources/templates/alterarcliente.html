@@ -21,36 +21,38 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-header">
-				<h1 class="display-4">
+				<h1 class="display-5 d-flex justify-content-center">
 				Alterar Cliente
 				</h1>
 			</div>
 		</div>
 		<form th:action="@{'/cliente'+'/salvaralteracaocliente'+'/'+${clienteid}}" method="POST">
+				<div class="col py-3 px-md-5"></div>
 	   <div class="card mt-2">
 			<div class="mb-3">
 				<div  class="card-body">
 						<div class="mb-3">
 						<label for="nomeCliente">Nome</label>
-						<input  class="form-control" id="nomeCliente" name="nomeCliente" th:placeholder="${clientenome}"/>
+						<input  class="form-control mh-100" style="width: 700px; height: 40px;" id="nomeCliente" name="nomeCliente" th:placeholder="${clientenome}"/>
 					
 					</div>
 					<div class="mb-3">
 						<label for="telefoneCliente">Telefone</label>
-						<input  class="form-control" id="telefoneCliente" name="telefoneCliente" th:placeholder="${clientetelefone}"/>
+						<input  class="form-control mh-100" style="width: 700px; height: 40px;" id="telefoneCliente" name="telefoneCliente" th:placeholder="${clientetelefone}"/>
 						
 					</div>
-				
+					<div class="col py-3 px-md-5"></div>
 					
-						<div class="d-flex justify-content-around">
-							<div class="mb-3">
-								<button type="submit" class="btn btn-outline-success">Salvar Alterações</button>
+					
+								<div class="d-flex justify-content-start">
+								<button type="submit" class="btn btn-outline-success" style="width: 300px; height: 40px;">Salvar Alterações</button>
 							</div>
-							<div class="mb-3">
-							<a href="/cliente/inicio"><button type="button" class="btn btn-outline-danger">Cancelar Alterações</button></a>
+							<div class="col py-3 px-md-5"></div> 
+								<div class="d-flex justify-content-start">
+							<a href="/cliente/inicio"><button type="button" class="btn btn-outline-danger" style="width: 300px; height: 40px;">Cancelar Alterações</button></a>
 							</div>
 							
-						</div>
+						
 			</div>
 			</div>
 	</div>

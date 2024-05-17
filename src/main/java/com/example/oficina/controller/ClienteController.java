@@ -72,13 +72,23 @@ public class ClienteController {
 	@GetMapping("excluircliente/{id}")
 	public String excluirCliente(@PathVariable String id) {
 		Long id2 = Long.parseLong(id);
-		clienteService.deletebyId(id2);
+		pedidoService.excluirTodosPedidos(id2);
+		clienteService.excluirCliente(id2);
+		
 		return "redirect:/cliente/menu";
 		
 	}
 	
+	@GetMapping("excluirpedido/{id}")
+	public String excluirPedido(@PathVariable String id) {
+		Long id2 = Long.parseLong(id);
+		pedidoService.excluirPedido(id2);
+		return "redirect:/cliente/menu";
+		
+	}
 	@GetMapping("alterarcliente/{id}")
 	public String alterarCliente(@PathVariable String id, Model model,ClienteDTO clienteDto) {
+		System.out.println("vvsvd");
 		Long id2 = Long.parseLong(id);
 		Optional<Cliente> cliente = clienteService.findById(id2);
 		Cliente cliente2 = cliente.get();
@@ -139,7 +149,6 @@ public class ClienteController {
 	public String alterarPedido(@PathVariable String id, @PathVariable String clienteid,Model model, PedidoDTO pedidoDto) {
 		Long id2 = Long.parseLong(id);
 		Long clienteid2 = Long.parseLong(clienteid);
-
 		Optional<Pedido> pedido = pedidoService.findById(id2);
 		Optional<Cliente> cliente = clienteService.findById(clienteid2);
 		Pedido pedido2 = pedido.get();
@@ -151,6 +160,8 @@ public class ClienteController {
 		model.addAttribute("pedidoValorPeca", pedido2.getPecaValor());
 		model.addAttribute("pedidoValorMao", pedido2.getMaoObra());
 		model.addAttribute("pedidoDataEntrada", pedido2.getDataEntrada());
+		model.addAttribute("pedidoDataSaida", pedido2.getDataSaida());
+		model.addAttribute("pedidoDataSaida", pedido2.getDataSaida());
 		model.addAttribute("observacao", pedido2.getObservacao());
 
 		return "alterarpedido";
@@ -163,7 +174,9 @@ public class ClienteController {
 			Optional<Cliente> cliente = clienteService.findById(clienteid2);
 			Cliente cliente2 = cliente.get();
 			Pedido pedido = pedidoDto.toPedido(pedidoDto,cliente2);
+			System.out.println("Defeito do salvar: "+pedidoDto.getPeca());
 			pedidoService.update(pedido,id2);
+			
 		return "redirect:/cliente/menu";
 		}catch(ConstraintViolationException e) {
 			return "cadastrocliente";

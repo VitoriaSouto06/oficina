@@ -25,47 +25,56 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-header">
-				<h1 class="display-4">
+				<h1 class="display-5 d-flex justify-content-center">
 				Novo Pedido
 				</h1>
 			</div>
 		</div>
 			<form  th:action="@{'/cliente'+'/salvarpedido'+'/'+${clienteid}}" method="POST">
-	   <div class="card mt-2">
+	 	<div class="col py-3 px-md-5"></div>  <div class="card mt-2">
 			<div class="mb-3">
 				<div  class="card-body">
 						<div class="mb-3">
 						<label for="nomeAparelho">Nome do aparelho</label>
-						<input required class="form-control" name="nomeAparelho" placeholder="Nome do aparelho"/>
+						<input required class="form-control mh-100" style="width: 700px; height: 40px;" name="nomeAparelho" placeholder="Nome do aparelho"/>
 					
 					</div>
 					<div class="mb-3">
 						<label for="modeloAparelho">Modelo do aparelho</label>
-						<input required class="form-control" name="modeloAparelho" placeholder="Nome do modelo"/>
+						<input required class="form-control mh-100" style="width: 700px; height: 40px;" name="modeloAparelho" placeholder="Nome do modelo"/>
 						
 					</div>
 				
 					<div class="mb-3">
 						<label for="pecaValor">Valor da peça</label>
-						<input required class="form-control" id="pecaValor" name="pecaValor" placeholder="R$ 00,00"/>
+						<input required class="form-control mh-100" style="width: 700px; height: 40px;" id="pecaValor" name="pecaValor" placeholder="R$ 00,00"/>
 						
 					</div>
 					
 					<div class="mb-3">
 						<label for="maoObra">Valor da mão de obra</label>
-						<input required class="form-control" id="maoObra" name="maoObra" placeholder="R$ 00,00"/>
+						<input required class="form-control mh-100" style="width: 700px; height: 40px;" id="maoObra" name="maoObra" placeholder="R$ 00,00"/>
 						
 					</div>
 					
 					<div class="mb-3">
 						<label for="dataEntrada">Data de entrada</label>
-						<input type="date" required class="form-control" name="dataEntrada" placeholder="00/00/0000"/>
+						<input type="date" required class="form-control mh-100" style="width: 150px; height: 40px;" name="dataEntrada" placeholder="00/00/0000"/>
 						
 					</div>
+					<div class="mb-3">
+						<label for="defeito">Defeito</label>
+						<input class="form-control mh-100" style="width: 700px; height: 40px;" name="defeito"/>
 					
+					</div>
+						<div class="mb-3">
+						<label for="peca">Peça</label>
+						<input class="form-control mh-100" style="width: 700px; height: 40px;" name="peca"/>
+					
+					</div>
 					<div class="mb-3">
 						<label for="observacao">Observação</label>
-						<input class="form-control" name="observacao"/>
+						<input class="form-control mh-100" style="width: 700px; height: 40px;" name="observacao"/>
 					
 					</div>
 						<div class="d-flex justify-content-around">

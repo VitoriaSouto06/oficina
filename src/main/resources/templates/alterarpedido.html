@@ -21,13 +21,13 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-header">
-				<h1 class="display-4">
+				<h1 class="display-5 d-flex justify-content-center">
 				Alterar Pedido
 				</h1>
 			</div>
 		</div>
 			<form  th:action="@{'/cliente'+'/salvaralteracaopedido'+'/'+${pedidoId}+'/'+${clienteId}}" method="POST">
-	   <div class="card mt-2">
+	 	<div class="col py-3 px-md-5"></div>  <div class="card mt-2">
 			<div class="mb-3">
 				<div  class="card-body">
 						<div class="mb-3">
@@ -57,6 +57,23 @@
 						<label for="dataEntrada">Data de entrada</label>
 						<input type="date"  class="form-control" name="dataEntrada" th:placeholder="${#temporals.format(pedidoDataEntrada,'dd/MM/yyyy')}"/>
 						
+					</div>
+					<div class="mb-3">
+						<label for="dataSaida">Data de saída</label>
+						<input type="date"  class="form-control" name="dataSaida" th:placeholder="${#temporals.format(pedidoDataSaida,'dd/MM/yyyy')}"/>
+						
+					</div>
+					
+						<div class="mb-3">
+						<label for="peca">Peça</label>
+						<input class="form-control" name="peca"/>
+					
+					</div>
+					
+						<div class="mb-3">
+						<label for="defeito">Defeito</label>
+						<input class="form-control" name="defeito"/>
+					
 					</div>
 					
 				<div class="mb-3">
